@@ -1,0 +1,12 @@
+# Ignore all node_modules directories, regardless of depth
+**/node_modules/
+
+# Ignore compiled output folders for React projects
+**/build/
+**/dist/
+
+# Ignore other common MERN-related files
+.env # Contains environment-specific variables
+.DS_Store # macOS system files
+*.log # Log files
+
