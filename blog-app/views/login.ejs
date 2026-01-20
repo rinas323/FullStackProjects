@@ -1,0 +1,16 @@
+<%- include('partials/header') %>
+
+<div class="max-w-md mx-auto mt-20">
+  <h1 class="text-2xl font-bold mb-4">Login</h1>
+  <% if (error) { %>
+    <p class="text-red-600 mb-4"><%= error %></p>
+  <% } %>
+  <form action="/login" method="POST" class="space-y-4">
+    <input type="text" name="usernameOrEmail" placeholder="Username or Email" class="border p-2 w-full" required />
+    <input type="password" name="password" placeholder="Password" class="border p-2 w-full" required />
+    <button class="bg-blue-600 text-white px-4 py-2 w-full">Login</button>
+  </form>
+  <p class="mt-4 text-sm">Don't have an account? <a href="/register" class="text-blue-500">Register</a></p>
+</div>
+
+<%- include('partials/footer') %>

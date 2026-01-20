@@ -7,6 +7,7 @@
 
 # Ignore other common MERN-related files
 .env # Contains environment-specific variables
+**/.env
 .DS_Store # macOS system files
 *.log # Log files
-
+*.db

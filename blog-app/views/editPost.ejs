@@ -1,0 +1,26 @@
+<%- include('partials/header') %>
+<div class="max-w-2xl mx-auto mt-10">
+  <h1 class="text-3xl font-bold mb-6">Edit Post</h1>
+
+  <form action="/dashboard/edit/<%= post._id %>" method="POST" class="space-y-4">
+    <input 
+      type="text" 
+      name="title" 
+      value="<%= post.title %>" 
+      class="border p-2 w-full" 
+      placeholder="Title"
+      required
+    >
+    <textarea 
+      name="body" 
+      class="border p-2 w-full h-40" 
+      placeholder="Write something..."
+      required
+    ><%= post.body %></textarea>
+
+    <button class="bg-blue-600 text-white px-4 py-2 rounded">Update Post</button>
+  </form>
+
+  <a href="/dashboard" class="block mt-6 text-blue-600 underline">← Back to Dashboard</a>
+</div>
+<%- include('partials/footer') %>

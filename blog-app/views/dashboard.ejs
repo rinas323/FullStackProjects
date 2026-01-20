@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+  <%- include('partials/header') %>
+  <div class="max-w-2xl mx-auto mt-10">
+    <h1 class="text-3xl font-bold mb-6">Welcome, <%= currentUser.username %></h1>
+    
+    <form action="/dashboard/new" method="POST" class="mb-6 space-y-2">
+      <input
+      type="text"
+      name="title"
+      placeholder="Post title"
+      class="border p-2 w-full"
+      />
+      <textarea id="bodyInput" name="body" class="border p-2 w-full h-40"></textarea>
+      
+      <script src="/tinymce/tinymce.min.js"></script>
+<script>
+tinymce.init({
+  selector: "#bodyInput",
+  plugins: "image link media table code lists",
+  toolbar:
+    "undo redo | formatselect | bold italic underline | alignleft aligncenter alignright | bullist numlist | image media link",
+  height: 500,
+  automatic_uploads: true,
+
+  images_upload_handler: (info) => {
+    return new Promise((resolve, reject) => {
+      const formData = new FormData();
+      formData.append("file", info.blob(), info.filename());
+
+      fetch("/uploads/image", {
+        method: "POST",
+        body: formData
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          resolve(data.location);
+        })
+        .catch((err) => {
+          reject("Upload failed");
+        });
+    });
+  }
+});
+</script>
+
+
+
+
+<button class="bg-green-600 text-white px-4 py-2">Add Post</button>
+</form>
+
+<h2 class="text-xl font-bold mb-4">Your Posts</h2>
+<% Posts.forEach(post => { %>
+  <div class="border-b py-3">
+    <h3 class="font-semibold"><%= post.title %></h3>
+    <p class="text-gray-700"><%- post.body %></p>
+    <a href="/dashboard/edit/<%= post._id %>" class="text-blue-500">Edit</a>
+    <form action="/dashboard/delete/<%= post._id %>" method="POST">
+      <button class="text-red-500">Delete</button>
+    </form>
+  </div>
+  <% }) %>
+</div>
+<%- include('partials/footer') %>
+
+</body>
+</html>
