@@ -8,6 +8,8 @@ const mongoose = require('mongoose');
 const MongoStore = require('connect-mongo');
 const uploadRoutes = require('./routes/uploadRoutes');
 const app = express();
+require("dotenv").config();
+
 
 //mongodb connection
 const MONGO_URI=process.env.MONGO_URI || "mongodb://127.0.0.1:27017/blog_app";
@@ -17,7 +19,6 @@ mongoose.connect(MONGO_URI).then(()=>{
   console.log("Error Connectin to the database ",err);
 });
 
-require("dotenv").config();
 
 
 //Settings
